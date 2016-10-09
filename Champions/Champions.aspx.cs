@@ -13,20 +13,29 @@ namespace Champions
     public partial class Champions : System.Web.UI.Page
     {
         ApiMarvel api = new ApiMarvel();
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
             {
                 List<Character> result = new List<Character>();
+                List<Character> resultDatalist = new List<Character>();
                 while (ListBox1.Items.Count < 10)
                 {
                     result = api.GetCharacters();
                     foreach (Character c in result)
                     {
                         if (ListBox1.Items.Count < 10)
+                        {
                             ListBox1.Items.Add(new ListItem(c.Name, c.Id.ToString()));
+                            resultDatalist.Add(c);
+                        }
                     }
                 }
+                dlTeam1.DataSource = resultDatalist;
+                dlTeam1.DataBind();
+
+                resultDatalist = new List<Character>();
                 int offset = 90;
                 while (ListBox2.Items.Count < 10)
                 {
@@ -35,9 +44,14 @@ namespace Champions
                     foreach (Character c in result)
                     {
                         if (ListBox2.Items.Count < 10)
+                        {
                             ListBox2.Items.Add(new ListItem(c.Name, c.Id.ToString()));
+                            resultDatalist.Add(c);
+                        }
                     }
                 }
+                dlTeam2.DataSource = resultDatalist;
+                dlTeam2.DataBind();
             }
         }
 

@@ -24,6 +24,7 @@
                         <div class="well">
                             Selecione três integrantes de cada time
                         </div>
+
                         <br />
                         <asp:Label ID="lblMsg" runat="server" Text="" ForeColor="Red"></asp:Label>
                         <asp:Table ID="Table1" runat="server" CellPadding="10" CellSpacing="2">
@@ -33,6 +34,42 @@
                                 </asp:TableCell>
                                 <asp:TableCell>
                                 <span class="label label-default">Time 2</span>
+                                </asp:TableCell>
+                            </asp:TableRow>
+                            <asp:TableRow>
+                                <asp:TableCell>
+                                    <asp:DataList ID="dlTeam1" runat="server">
+                                        <HeaderTemplate>
+                                            <div class="well" style="font-weight: bold;">
+                                                Integrantes do time 1
+                                            </div>
+                                        </HeaderTemplate>
+                                        <ItemTemplate>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <img src="<%# Eval("Thumbnail.Path") %>.<%# Eval("Thumbnail.Extension") %>" height="50" width="50" />
+                                                    <%# Eval("Name") %>
+                                                   </div>
+                                            </div>
+                                        </ItemTemplate>
+                                    </asp:DataList>
+                                </asp:TableCell>
+                                <asp:TableCell>
+                                    <asp:DataList ID="dlTeam2" runat="server">
+                                            <HeaderTemplate>
+                                                <div class="well" style="font-weight: bold;">
+                                                    Integrantes do time 2
+                                                </div>
+                                            </HeaderTemplate>
+                                            <ItemTemplate>
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <img src="<%# Eval("Thumbnail.Path") %>.<%# Eval("Thumbnail.Extension") %>" height="50" width="50" />
+                                                        <%# Eval("Name") %>
+                                                    </div>
+                                                </div>
+                                            </ItemTemplate>
+                                        </asp:DataList>
                                 </asp:TableCell>
                             </asp:TableRow>
                             <asp:TableRow>
@@ -51,7 +88,7 @@
                         </asp:Table>
                         <br />
                         <div id="winnerCharacters">
-                            Time campeão: <asp:Label ID="lblTime" runat="server" Text=""></asp:Label>
+                            <strong>Time campeão: <asp:Label ID="lblTime" runat="server" Text=""></asp:Label></strong>
                             <asp:DataList ID="dlWinners" runat="server">
                                 <HeaderTemplate>
                                     <div class="well" style="font-weight: bold;">
@@ -62,7 +99,7 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <img src="<%# Eval("Thumbnail.Path") %>.<%# Eval("Thumbnail.Extension") %>" height="50" width="50" />
-                                            <%# Eval("Name") %> (<%# Eval("ID") %>)
+                                            <%# Eval("Name") %>
                                             <div class="panel panel-default">
                                                 <div class="panel-body">
                                                     <%# Eval("Description") %>
@@ -76,6 +113,7 @@
                     </div>
                 </div>
             </div>
+        </div>
     </form>
 </body>
 </html>

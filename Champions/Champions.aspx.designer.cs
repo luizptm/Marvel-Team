@@ -40,6 +40,24 @@ namespace Champions {
         protected global::System.Web.UI.WebControls.Table Table1;
         
         /// <summary>
+        /// dlTeam1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DataList dlTeam1;
+        
+        /// <summary>
+        /// dlTeam2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DataList dlTeam2;
+        
+        /// <summary>
         /// ListBox1 control.
         /// </summary>
         /// <remarks>
