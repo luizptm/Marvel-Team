@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="0cf7c60f6df6404e8b86a041bc01f96b" Name="Diagram1">
+        <EntityTypeShape EntityType="ChampionsModel.Attendant" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ChampionsModel.Winner" Width="1.5" PointX="5.5" PointY="3" />
+        <EntityTypeShape EntityType="ChampionsModel.Team" Width="1.5" PointX="4.6014099608182022" PointY="19.504825288199271" />
+        <AssociationConnector Association="ChampionsModel.FK_Attendant_Group" />
+        <AssociationConnector Association="ChampionsModel.FK_Winner_Group" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

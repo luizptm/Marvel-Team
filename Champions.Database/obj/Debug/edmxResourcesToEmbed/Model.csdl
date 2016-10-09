@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ChampionsModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="ChampionsEntities" p1:LazyLoadingEnabled="true">
+    <EntitySet Name="Attendant" EntityType="ChampionsModel.Attendant" />
+    <EntitySet Name="Winner" EntityType="ChampionsModel.Winner" />
+    <EntitySet Name="Team" EntityType="ChampionsModel.Team" />
+    <AssociationSet Name="FK_Attendant_Group" Association="ChampionsModel.FK_Attendant_Group">
+      <End Role="Team" EntitySet="Team" />
+      <End Role="Attendant" EntitySet="Attendant" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Winner_Group" Association="ChampionsModel.FK_Winner_Group">
+      <End Role="Team" EntitySet="Team" />
+      <End Role="Winner" EntitySet="Winner" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Attendant">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="name" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="idGrupo" Type="Int32" Nullable="false" />
+    <Property Type="Int32" Name="power" Nullable="false" />
+    <NavigationProperty Name="Team" Relationship="ChampionsModel.FK_Attendant_Group" FromRole="Attendant" ToRole="Team" />
+  </EntityType>
+  <EntityType Name="Winner">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="idGrupo" />
+    <NavigationProperty Name="Team" Relationship="ChampionsModel.FK_Winner_Group" FromRole="Winner" ToRole="Team" />
+  </EntityType>
+  <EntityType Name="Team">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="name" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Attendant" Relationship="ChampionsModel.FK_Attendant_Group" FromRole="Team" ToRole="Attendant" />
+    <NavigationProperty Name="Winner" Relationship="ChampionsModel.FK_Winner_Group" FromRole="Team" ToRole="Winner" />
+  </EntityType>
+  <Association Name="FK_Attendant_Group">
+    <End Type="ChampionsModel.Team" Role="Team" Multiplicity="1" />
+    <End Type="ChampionsModel.Attendant" Role="Attendant" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Team">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Attendant">
+        <PropertyRef Name="idGrupo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Winner_Group">
+    <End Type="ChampionsModel.Team" Role="Team" Multiplicity="0..1" />
+    <End Type="ChampionsModel.Winner" Role="Winner" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Team">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Winner">
+        <PropertyRef Name="idGrupo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ChampionsModelStoreContainer" CdmEntityContainer="ChampionsEntities">
+    <EntitySetMapping Name="Attendant">
+      <EntityTypeMapping TypeName="ChampionsModel.Attendant">
+        <MappingFragment StoreEntitySet="Attendant">
+          <ScalarProperty Name="power" ColumnName="power" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="idGrupo" ColumnName="idGrupo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Winner">
+      <EntityTypeMapping TypeName="ChampionsModel.Winner">
+        <MappingFragment StoreEntitySet="Winner">
+          <ScalarProperty Name="idGrupo" ColumnName="idGrupo" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Team">
+      <EntityTypeMapping TypeName="ChampionsModel.Team">
+        <MappingFragment StoreEntitySet="Team">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

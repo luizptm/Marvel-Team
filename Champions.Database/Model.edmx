@@ -1,0 +1,190 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ChampionsModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="ChampionsModelStoreContainer">
+          <EntitySet Name="Attendant" EntityType="ChampionsModel.Store.Attendant" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Team" EntityType="ChampionsModel.Store.Team" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Winner" EntityType="ChampionsModel.Store.Winner" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_Attendant_Group" Association="ChampionsModel.Store.FK_Attendant_Group">
+            <End Role="Team" EntitySet="Team" />
+            <End Role="Attendant" EntitySet="Attendant" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Winner_Group" Association="ChampionsModel.Store.FK_Winner_Group">
+            <End Role="Team" EntitySet="Team" />
+            <End Role="Winner" EntitySet="Winner" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Attendant">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="power" Type="int" Nullable="false" />
+          <Property Name="idGrupo" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Team">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Winner">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="idGrupo" Type="int" />
+        </EntityType>
+        <Association Name="FK_Attendant_Group">
+          <End Role="Team" Type="ChampionsModel.Store.Team" Multiplicity="1" />
+          <End Role="Attendant" Type="ChampionsModel.Store.Attendant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Team">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Attendant">
+              <PropertyRef Name="idGrupo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Winner_Group">
+          <End Role="Team" Type="ChampionsModel.Store.Team" Multiplicity="0..1" />
+          <End Role="Winner" Type="ChampionsModel.Store.Winner" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Team">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Winner">
+              <PropertyRef Name="idGrupo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ChampionsModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="ChampionsEntities" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="Attendant" EntityType="ChampionsModel.Attendant" />
+          <EntitySet Name="Winner" EntityType="ChampionsModel.Winner" />
+          <EntitySet Name="Team" EntityType="ChampionsModel.Team" />
+          <AssociationSet Name="FK_Attendant_Group" Association="ChampionsModel.FK_Attendant_Group">
+            <End Role="Team" EntitySet="Team" />
+            <End Role="Attendant" EntitySet="Attendant" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Winner_Group" Association="ChampionsModel.FK_Winner_Group">
+            <End Role="Team" EntitySet="Team" />
+            <End Role="Winner" EntitySet="Winner" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Attendant">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="idGrupo" Type="Int32" Nullable="false" />
+          <Property Type="Int32" Name="power" Nullable="false" />
+          <NavigationProperty Name="Team" Relationship="ChampionsModel.FK_Attendant_Group" FromRole="Attendant" ToRole="Team" />
+        </EntityType>
+        <EntityType Name="Winner">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="idGrupo" />
+          <NavigationProperty Name="Team" Relationship="ChampionsModel.FK_Winner_Group" FromRole="Winner" ToRole="Team" />
+        </EntityType>
+        <EntityType Name="Team">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="name" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Attendant" Relationship="ChampionsModel.FK_Attendant_Group" FromRole="Team" ToRole="Attendant" />
+          <NavigationProperty Name="Winner" Relationship="ChampionsModel.FK_Winner_Group" FromRole="Team" ToRole="Winner" />
+        </EntityType>
+        <Association Name="FK_Attendant_Group">
+          <End Type="ChampionsModel.Team" Role="Team" Multiplicity="1" />
+          <End Type="ChampionsModel.Attendant" Role="Attendant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Team">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Attendant">
+              <PropertyRef Name="idGrupo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Winner_Group">
+          <End Type="ChampionsModel.Team" Role="Team" Multiplicity="0..1" />
+          <End Type="ChampionsModel.Winner" Role="Winner" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Team">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Winner">
+              <PropertyRef Name="idGrupo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ChampionsModelStoreContainer" CdmEntityContainer="ChampionsEntities">
+          <EntitySetMapping Name="Attendant">
+            <EntityTypeMapping TypeName="ChampionsModel.Attendant">
+              <MappingFragment StoreEntitySet="Attendant">
+                <ScalarProperty Name="power" ColumnName="power" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="idGrupo" ColumnName="idGrupo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Winner">
+            <EntityTypeMapping TypeName="ChampionsModel.Winner">
+              <MappingFragment StoreEntitySet="Winner">
+                <ScalarProperty Name="idGrupo" ColumnName="idGrupo" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Team">
+            <EntityTypeMapping TypeName="ChampionsModel.Team">
+              <MappingFragment StoreEntitySet="Team">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

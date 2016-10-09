@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ChampionsModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="ChampionsModelStoreContainer">
+    <EntitySet Name="Attendant" EntityType="ChampionsModel.Store.Attendant" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Team" EntityType="ChampionsModel.Store.Team" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Winner" EntityType="ChampionsModel.Store.Winner" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_Attendant_Group" Association="ChampionsModel.Store.FK_Attendant_Group">
+      <End Role="Team" EntitySet="Team" />
+      <End Role="Attendant" EntitySet="Attendant" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Winner_Group" Association="ChampionsModel.Store.FK_Winner_Group">
+      <End Role="Team" EntitySet="Team" />
+      <End Role="Winner" EntitySet="Winner" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Attendant">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="power" Type="int" Nullable="false" />
+    <Property Name="idGrupo" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Team">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Winner">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="idGrupo" Type="int" />
+  </EntityType>
+  <Association Name="FK_Attendant_Group">
+    <End Role="Team" Type="ChampionsModel.Store.Team" Multiplicity="1" />
+    <End Role="Attendant" Type="ChampionsModel.Store.Attendant" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Team">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Attendant">
+        <PropertyRef Name="idGrupo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Winner_Group">
+    <End Role="Team" Type="ChampionsModel.Store.Team" Multiplicity="0..1" />
+    <End Role="Winner" Type="ChampionsModel.Store.Winner" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Team">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Winner">
+        <PropertyRef Name="idGrupo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
