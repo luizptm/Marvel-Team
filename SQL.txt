@@ -1,0 +1,35 @@
+USE [Champions]
+----------------------
+CREATE TABLE [dbo].[Attendant](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[name] [nvarchar](50) NOT NULL,
+	[power] [int] NOT NULL,
+	[idGrupo] [int] NOT NULL,
+ CONSTRAINT [PK_Attendant] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+ALTER TABLE [dbo].[Attendant]  WITH CHECK ADD  CONSTRAINT [FK_Attendant_Group] FOREIGN KEY([idGrupo]) REFERENCES [dbo].[Group] ([id])
+ALTER TABLE [dbo].[Attendant] CHECK CONSTRAINT [FK_Attendant_Group]
+-----------------------
+CREATE TABLE [dbo].[Group](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[name] [nvarchar](50) NULL,
+ CONSTRAINT [PK_Group] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+----------------------
+CREATE TABLE [dbo].[Winner](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[idGrupo] [int] NULL,
+ CONSTRAINT [PK_Winner] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+ALTER TABLE [dbo].[Winner]  WITH CHECK ADD  CONSTRAINT [FK_Winner_Group] FOREIGN KEY([idGrupo]) REFERENCES [dbo].[Group] ([id])
+ALTER TABLE [dbo].[Winner] CHECK CONSTRAINT [FK_Winner_Group]
+
