@@ -22,7 +22,7 @@ namespace Champions
                 List<Character> resultDatalist = new List<Character>();
                 while (ListBox1.Items.Count < 10)
                 {
-                    result = api.GetCharacters();
+                    result = api.GetCharactersRandomly();
                     foreach (Character c in result)
                     {
                         if (ListBox1.Items.Count < 10)
@@ -40,7 +40,7 @@ namespace Champions
                 while (ListBox2.Items.Count < 10)
                 {
                     offset = offset + 10;
-                    result = api.GetCharacters(offset);
+                    result = api.GetCharactersRandomly(offset);
                     foreach (Character c in result)
                     {
                         if (ListBox2.Items.Count < 10)

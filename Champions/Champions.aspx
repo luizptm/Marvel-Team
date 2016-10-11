@@ -9,7 +9,6 @@
     <link href="Content/bootstrap-theme.css" rel="stylesheet" />
     <script type="text/javascript" src="/Scripts/jquery-1.9.1.js"></script>
     <script type="text/javascript" src="/Scripts/Main.js"></script>
-    <script src="Scripts/angular.min.js"></script>
 </head>
 <body>
     <form id="form1" runat="server">
