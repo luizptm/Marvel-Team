@@ -22,7 +22,7 @@ namespace Champions
                 List<Character> resultDatalist = new List<Character>();
                 while (ListBox1.Items.Count < 10)
                 {
-                    result = api.GetCharactersRandomly();
+                    result = api.GetCharacters();
                     foreach (Character c in result)
                     {
                         if (ListBox1.Items.Count < 10)
